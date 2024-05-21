@@ -7,6 +7,9 @@ public class CreateGraphqlQueryImpl implements CreateGraphqlQuery{
     private StringBuilder stringBuilder = new StringBuilder();
 
 	public String create(Query query) {
+		//test query IS NOT NULL
+		
+		
 		this.stringBuilder.append("query {\n");
 
 		if(query.containerInitialized) {
@@ -32,5 +35,4 @@ public class CreateGraphqlQueryImpl implements CreateGraphqlQuery{
 	
 		return stringBuilder.toString();
 	}
-    
 }

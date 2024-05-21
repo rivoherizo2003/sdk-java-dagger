@@ -6,18 +6,17 @@ import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.core5.net.URIBuilder;
+
 
 public class ClientSdkDagger implements Client {
 
     private String url = null;
 
-    private HttpClient httpClient;
+    private CloseableHttpClient httpClient;
 
     private HttpGet httpGet;
 
@@ -43,11 +42,11 @@ public class ClientSdkDagger implements Client {
         HttpGet httpGet = new HttpGet(this.url);
         URI uri;
         try {
-            uri = new URIBuilder(httpGet.getURI())
+            uri = new URIBuilder(httpGet.getUri())
             .addParameter("query", queryString)
             .build();
 
-            httpGet.setURI(uri);
+            httpGet.setUri(uri);
             httpGet.addHeader("Authorization", "Basic "+this.authToken);
 
             this.httpGet = httpGet;
@@ -58,14 +57,11 @@ public class ClientSdkDagger implements Client {
         return this;
     }
 
-    public HttpResponse execute(){
+    public void execute(){
         try {
-            return this.httpClient.execute(this.httpGet);
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
+            System.out.println(this.httpClient.executeOpen(null, this.httpGet, null));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
     }
 }

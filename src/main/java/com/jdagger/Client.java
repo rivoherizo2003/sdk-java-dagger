@@ -1,6 +1,5 @@
 package com.jdagger;
 
-import org.apache.http.HttpResponse;
 
 public interface Client {
     Client createClient(String url);
@@ -9,5 +8,5 @@ public interface Client {
 
     Client withToken(String token);
 
-    HttpResponse execute();
+    void execute();
 }

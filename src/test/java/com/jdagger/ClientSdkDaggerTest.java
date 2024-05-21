@@ -3,15 +3,7 @@ package com.jdagger;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.junit.Test;
-
-import com.jdagger.builder.QueryBuilder;
-import com.jdagger.builder.QueryBuilderImpl;
-import com.jdagger.dto.Query;
-import com.jdagger.exception.ContainerException;
 
 /**
  * Unit test for simple App.
