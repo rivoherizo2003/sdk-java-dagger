@@ -1,6 +1,5 @@
 package com.jdagger;
 
-
 public interface Client {
     Client createClient(String url);
 
