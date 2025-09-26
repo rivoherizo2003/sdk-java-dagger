@@ -11,7 +11,6 @@ import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.core5.net.URIBuilder;
 
-
 public class ClientSdkDagger implements Client {
 
     private String url = null;
@@ -25,7 +24,7 @@ public class ClientSdkDagger implements Client {
     @Override
     public Client createClient(String url) {
         this.url = url;
-        
+
         this.httpClient = HttpClientBuilder.create().build();
 
         return this;
@@ -38,16 +37,17 @@ public class ClientSdkDagger implements Client {
     }
 
     public Client createRequestHttpGet(String queryString) {
-        if(this.url == null) throw new RuntimeException("URL is not initialized");
+        if (this.url == null)
+            throw new RuntimeException("URL is not initialized");
         HttpGet httpGet = new HttpGet(this.url);
         URI uri;
         try {
             uri = new URIBuilder(httpGet.getUri())
-            .addParameter("query", queryString)
-            .build();
+                    .addParameter("query", queryString)
+                    .build();
 
             httpGet.setUri(uri);
-            httpGet.addHeader("Authorization", "Basic "+this.authToken);
+            httpGet.addHeader("Authorization", "Basic " + this.authToken);
 
             this.httpGet = httpGet;
         } catch (URISyntaxException e) {
@@ -57,7 +57,7 @@ public class ClientSdkDagger implements Client {
         return this;
     }
 
-    public void execute(){
+    public void execute() {
         try {
             System.out.println(this.httpClient.executeOpen(null, this.httpGet, null));
         } catch (IOException e) {
