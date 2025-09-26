@@ -32,3 +32,9 @@ target/*
 .projects/*
 
 .classpath/*
+
+.projects
+
+.classpath
+
+.settings
